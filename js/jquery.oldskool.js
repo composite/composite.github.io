@@ -1,0 +1,1 @@
+﻿jQuery.browser=function(){var n=navigator.userAgent.toLowerCase(),t=/(webkit)[ \/](\w.]+)/.exec(n)||/(opera)(?:.*version)?[ \/](\w.]+)/.exec(n)||/(msie) ([\w.]+)/.exec(n)||!/compatible/.test(n)&&/(mozilla)(?:.*? rv:([\w.]+))?/.exec(n)||[];return{name:t[1]||"",version:t[2]||"0"}}();
