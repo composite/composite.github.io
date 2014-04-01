@@ -1,0 +1,137 @@
+@charset "euc-kr";
+
+body {
+	font-size: 75%;
+	line-height: 150%;
+	color: #434343;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	text-align: center;
+}
+
+body, div, p, ul, li, a, table, td, tr, h1, h2, h3, h4, h5, h6, form, span, iframe, select {
+	margin: 0;
+	padding: 0;
+	font-family: "Dotum", Arial, Helvetica, sans-serif;
+}
+
+img {
+	border: 0;
+	vertical-align: top;
+	padding: 0;
+}
+
+h1, h2, h3 {
+	display:none;
+}
+
+h1, h2, h3, h4, h5 ,h6 {
+	line-height: 150%;
+}
+
+h1 {font-size: 200%;}
+h2 {font-size: 180%;}
+h3 {font-size: 160%;}
+h4 {font-size: 140%;}
+h5 {font-size: 120%;}
+h6 {font-size: 100%;}
+
+a { 
+	font-size: 100%;
+	line-height: 150%;
+}
+
+a:link, a:visited {
+	color: #6f6f6f;
+	text-decoration: none;
+}
+
+a:active, a:hover {
+	color: #6fabca;
+	text-decoration: none;
+}
+
+div { 
+	font-size: 100%;
+}
+
+ul { 
+	font-size: 100%;
+	list-style: none;
+}
+
+li {	
+	font-size: 100%; 
+	line-height: 150%;
+}
+
+hr { 
+	display: none;
+}
+
+em { font-style: normal;}
+
+#wrapper_all {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+#wrapper {
+	width: 621px;
+	height: 100%;
+	text-align: left;
+	position: relative;
+	margin-left: 310px;
+	margin: 0 auto;
+}
+
+#wrapper h1 { display: block;}
+
+#container {
+	width: 561px;
+	padding: 0px 31px 0px 23px;
+	margin: 0;
+	border-left: 3px solid #a4c8e4;
+	border-right: 3px solid #a4c8e4;
+	clear: both;
+}
+
+.title_box {
+	background: url('img_title.gif') no-repeat left top;
+	padding: 30px 0 0 137px;
+	height: 103px;
+}
+
+#wrapper h2 { 
+	display: block;
+	background: url('blet_01.gif') no-repeat left 5px;
+	font-size: 100%;
+	padding: 0 0 5px 10px;
+	color: #fc8200;
+}
+
+ul.install_list { 
+	padding-left: 9px;
+	font-size: 90%;
+}
+
+ul.install_list li {
+	padding-bottom: 18px;
+}
+
+.box01 {
+	background: url('box_01.gif') no-repeat left top;
+	padding-top: 15px;
+	margin-top: 15px;
+	clear: left;
+}
+
+.box02 {
+	background: url('box_02.gif') no-repeat left bottom;
+	padding-bottom: 15px;
+	text-align: center;
+	clear: left;
+}
+
