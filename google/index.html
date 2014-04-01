@@ -60,14 +60,16 @@
 		<h2 class="sub">김치어</h2>
 	</header>
 	<section>
-		<div class="center">
-			<input type="search" class="search">
-		</div>
-		<br/>
-		<div class="center">
-			<button class="srchbtn" onclick="install()">Google 검색</button>
-			<button class="srchbtn" onclick="install()">I'm filling lucky</button>
-		</div>
+		<form action="./install.html" method="get">
+			<div class="center">
+				<input type="search" class="search">
+			</div>
+			<br/>
+			<div class="center">
+				<button class="srchbtn" type="submit">Google 검색</button>
+				<button class="srchbtn" type="submit">I'm filling lucky</button>
+			</div>
+		</form>
 	</section>
 	<footer>
 		<div class="fl bar">
@@ -101,10 +103,5 @@
 	  });
 	</script>
 	<!-- AddThis Smart Layers END -->
-	<script>
-	function install(){
-		location.href = './install.html';
-	}
-	</script>
 </body>
 </html>
