@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>JS for LINK</title>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/cosmo/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #editor{
+            height:360px;
+        }
+    </style>
+</head>
+<body>
+    <section class="container">
+        <h1 class="page-header">JS4Link</h1>
+        <p class="lead">Convert your javascript to javascript:protocol link, one click, run anywhere.</p>
+        <h3>Insert yout script</h3>
+        <div id="editor">//Insert your code here.</div>
+
+        <h3>See in your eyes.</h3>
+    </section>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="//cdn.rawgit.com/Trenker/Browser-UglifyJS/master/build/uglifyjs.1.2.5.min.js"></script>
+    <script src="//cdn.jsdelivr.net/ace/1.1.5/min/ace.js"></script>
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/javascript");
+    </script>
+</body>
+</html>
