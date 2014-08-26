@@ -9,7 +9,16 @@
         #linktext{cursor:text;}
         #linkframe{height:240px}
         #errorbox{display: none;}
+        #sharethis span
+        {
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+        }
     </style>
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({publisher: "fa81f71c-02bb-40ed-b82e-0974a42f553d", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 </head>
 <body>
     <header class="container">
@@ -19,6 +28,7 @@
     <section class="container">
         <h3>Insert yout script</h3>
         <div id="editor">//Insert your code here.</div>
+        <p>Size expected: <strong id="size">0 B</strong></p>
         <hr/>
         <button type="button" id="compile" class="btn btn-primary">Generate</button>
         <button type="button" id="example" class="btn btn-default">Example Script</button>
@@ -45,6 +55,15 @@
                 </div>
             </div>
         </form>
+        <h3>Do you like it?</h3>
+        <div id="sharethis">
+            <span class='st_sharethis_vcount' displayText='ShareThis'></span>
+            <span class='st_facebook_vcount' displayText='Facebook'></span>
+            <span class='st_twitter_vcount' displayText='Tweet'></span>
+            <span class='st_linkedin_vcount' displayText='LinkedIn'></span>
+            <span class='st_pinterest_vcount' displayText='Pinterest'></span>
+            <span class='st_googleplus_vcount' displayText='Google +'></span>
+        </div>
         <h3>Credits</h3>
         <ul>
             <li>Composite: (<a href="http://hazard.kr">http://hazard.kr</a>)</li>
@@ -67,6 +86,33 @@
         var editor = ace.edit("editor");
         editor.setTheme("ace/theme/monokai");
         editor.getSession().setMode("ace/mode/javascript");
+        editor.on('change', function(e){
+            if(editor.TYPETIMEOUT){
+                clearTimeout(editor.TYPETIMEOUT);
+                editor.TYPETIMEOUT = null;
+            }
+            editor.TYPETIMEOUT = setTimeout(function(){
+                var unit = ['B', 'KB', 'MB', 'GB', 'TB'], idx = 0;
+                try{
+                    var len = uglify(editor.getValue()).length;
+                    $('#errorbox').hide();
+                }catch(E){
+                    var lc = ['line', 'col'];
+                    $e = $('#errorbox').show().children().eq(1).text(E.message).end();
+                    if(E.line && E.col){
+                        $e.eq(0).children().each(function(i){$(this).text(E[lc[i]]);});
+                    }
+                    console.log(E);
+                    return;
+                }
+
+                while(len > 1024) {
+                    len/=1024;
+                    idx++;
+                }
+                $('#size').text((Math.round(len * 100) / 100) + ' ' + unit[idx]);
+            }, 500);
+        });
         $(function(){
             $('#compile').on('click', function(){
                 try{
@@ -74,10 +120,13 @@
                     $('#errorbox').hide();
                 }catch(E){
                     var lc = ['line', 'col'];
-                    $('#errorbox').show().children()
-                            .eq(0).children().each(function(i){$(this).text(E[lc[i]]);}).end().end()
-                            .eq(1).text(E.message);
+                    var $e = $('#errorbox').show().children().eq(1).text(E.message).end();
                     console.log(E);
+                    editor.focus();
+                    if(E.line && E.col){
+                        editor.navigateTo(E.line-1, E.col-1);
+                        $e.eq(0).children().each(function(i){$(this).text(E[lc[i]]);});
+                    }
                     return;
                 }
                 $('#linktext').val(min);
