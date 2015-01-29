@@ -14,6 +14,16 @@
 
     }
 
+    for(var i= 0,anchors=document.getElementsByTagName('a'),len=anchors.length;i<len;i++){
+        anchors[i].addEventListener('click', function(e){
+            if(~this.href.indexOf('#')){
+                e.stopPropagation();
+                e.preventDefault();
+                return false;
+            }
+        }, false);
+    }
+
     document.forms['sendme'].addEventListener('submit', function(e){
         var reqs = [],valid = true;
         for(var i=0;i<this.elements.length;i++)
@@ -31,7 +41,7 @@
             }
 
         if(true){
-            alert('send message is not yet support.\nYou can contact any kind of ways in the right pane.\nthank you for intereting me.');
+            alert('send message is not yet support due to blog system maintaince.\nYou can contact any kind of ways in the right pane.\nthank you for intereting me.');
             e.preventDefault();
             return false;
         }

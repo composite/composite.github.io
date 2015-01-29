@@ -114,6 +114,7 @@ a{color:#BDC3C7;@include transition(color .25s ease-in-out);text-decoration: non
   }
   &>.uk-col{
     float:left;height:100%;
+    margin:.5em auto;
   }
   &>input,&>select,&>textarea{
     width:100%;
@@ -238,7 +239,7 @@ a{color:#BDC3C7;@include transition(color .25s ease-in-out);text-decoration: non
       margin:0;padding:0;text-align: left;
       display: block;position: relative;
       img{
-        width:100%;
+        width:256px;height:256px;
       }
       figcaption {
         display: block;
