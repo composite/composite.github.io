@@ -87,12 +87,17 @@ a{color:#BDC3C7;@include transition(color .25s ease-in-out);text-decoration: non
 
 .t-l{text-align: left !important;}.t-c{text-align: center !important;}.t-r{text-align: right !important;}
 .f-l{float:left !important;}.f-r{float: right !important;}.c-l{clear: left !important;}.c-r{clear: right !important;}.c-b{clear: both !important;}
+.t-h{text-indent: -9999px;}
 
 .fullscreen-list{
   width:100%;height:100%;
 
-  &>article{
+  &>div{
     width:100%;position:relative;padding:8em 0;
+    header{
+      background: #2980B9;padding:2em 0;
+      h2,h3,h4{text-align: center;margin:0;padding:0 0 .25em;}
+    }
   }
   #main,#contact{
     height:100%;
@@ -278,12 +283,16 @@ a{color:#BDC3C7;@include transition(color .25s ease-in-out);text-decoration: non
 //첫 화면
 @include nemoshadow_init(nemoshowdowinit, .2);
 #main{
+  header{
+    margin:0;padding:0;
+  }
   .profile{
     margin:0;padding:0;top:5%;height:33.33333333333333%;
     display:block;position:absolute;left:0;right:0;
     text-align: center;
     img{
       border:8px solid white;border-radius: 16px;
+      height:100%;
     }
     z-index: 10;
   }
@@ -313,14 +322,14 @@ a{color:#BDC3C7;@include transition(color .25s ease-in-out);text-decoration: non
   }
 
   //제목
-  h1{
+  h2{
     text-align: center;font-size: 9em;margin:.1em 0 0;padding:0;
     text-shadow: 0 0 .25em rgba(255,255,255,.5);
     @include transform(translateY(-128px));
   }
 
   //부제
-  h2{
+  h3{
     text-align:center;
     //background: rgba(255,255,255,.5);color:black;
     padding:1em;
@@ -343,29 +352,28 @@ a{color:#BDC3C7;@include transition(color .25s ease-in-out);text-decoration: non
 }
 @media (min-width:$RPSV_TB_GTE) and (max-width:$RPSV_TB_LTE) {
   #main{
-    h1{
+    h2{
       font-size:5em;margin:.5em 0 0;
     }
-    h2{
+    h3{
       @include transform(translateY(-64px));
     }
   }
 }
 @media (max-width:($RPSV_TB_GTE)-1){
   #main{
-    h1{
+    h2{
       font-size:4em;margin:.6em 0 0;
     }
-    h2{display:none;}
+    h3{display:none;}
   }
 }
 
 //자기소개 화면
 #about{
   //자기소개
-  .content{
-    background: #2980B9;padding:2em 0;
-    h1,p{text-align: center;margin:0;padding:0 0 1em;}
+  header{
+    h2,p{text-align: center;margin:0;padding:0 0 1em;}
     p{font-size: 1.2em;}
   }
 
@@ -373,7 +381,7 @@ a{color:#BDC3C7;@include transition(color .25s ease-in-out);text-decoration: non
     max-width:1200px;
     margin:5% auto 0;
     text-align: center;
-    h2{
+    .devicons{
       font-size: 10em;
       width:1.6em;padding:.3em 0;
       margin:0 auto;
@@ -388,21 +396,11 @@ a{color:#BDC3C7;@include transition(color .25s ease-in-out);text-decoration: non
 
 //포트폴리오
 #portfolio{
-  //자기소개
-  .content{
-    background: #2980B9;padding:2em 0;
-    h1,h2,h3{text-align: center;margin:0;padding:0 0 .25em;}
-  }
 
 }
 
 //연락처
 #contact{
-  //자기소개
-  .content{
-    background: #2980B9;padding:2em 0;
-    h1,h2,h3{text-align: center;margin:0;padding:0 0 .25em;}
-  }
 
   .social-links{
     a{
