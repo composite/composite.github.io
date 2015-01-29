@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+.samgak{
+  display:block;position:relative;
+  width:128px;height:128px;
+  margin:0 auto;
+  border-radius:50%;
+  border:8px solid white;
+  border-left-color:transparent;
+  border-right-color:transparent;
+  border-bottom-color:transparent;
+  box-shadow: 0 0 64px 0px rgba(255,255,255,.5);
+
+  color:white;text-align:center;
+  font:bold 128px Georgia, serif;line-height:.475em;
+
+  @include animation(samgak1 3s linear infinite);
+}
+.samgak:before,.samgak:after{
+  display:block;position:absolute;content:'';
+  top:-8px;left:-8px;right:-8px;bottom:-8px;
+  border-radius:50%;
+  border:8px solid white;
+  border-left-color:transparent;
+  border-right-color:transparent;
+  border-bottom-color:transparent;
+  transform:rotate(120deg);
+}
+.samgak:after{
+  transform:rotate(240deg);
+}
+
+@include keyframes(samgak1) {
+  to {
+    transform:rotate(360deg);
+  }
+}
