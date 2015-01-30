@@ -396,7 +396,11 @@ a{color:#BDC3C7;@include transition(color .25s ease-in-out);text-decoration: non
 
 //포트폴리오
 #portfolio{
-
+  .uk-row{
+    h2{
+      text-align: center;
+    }
+  }
 }
 
 //연락처
