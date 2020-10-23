@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mybatis Log Parser</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@^4.0.0/animate.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/quasar@1.14.1/dist/quasar.min.css" rel="stylesheet" type="text/css">
+    <!-- Prism Editor -->
+    <link rel="stylesheet" href="https://unpkg.com/vue-prism-editor/dist/prismeditor.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/prismjs/themes/prism-tomorrow.css" />
+    <style>
+      a {color: white;}
+      .about {cursor: help;}
+      .mono {font-family: D2Coding, NanumGothicCoding, 'Courier New', Courier, monospace;}
+    </style>
+  </head>
+
+  <body>
+    <!-- Add the following at the end of your body tag -->
+    <div id="app">
+      <q-layout view="hHh lpR fFf">
+        <q-header elevated class="bg-primary text-white">
+          <q-toolbar>
+            <q-toolbar-title>
+              <q-avatar class="about" @click="about = true">
+                <img src="/img/mybatis-icon.png">
+              </q-avatar>
+              Mybatis Log Parser
+            </q-toolbar-title>
+            <q-select outlined map-options dense class="q-mr-md" v-model="tab" :options="tabs" label="Indent as"></q-select>
+            <q-btn color="primary" label="Parse!" @click="parseLog"></q-btn>
+          </q-toolbar>
+        </q-header>
+        <q-page-container>
+          <q-page>
+            <div class="column full-height">
+              <div class="col-4">
+                <q-input v-model="log" square outlined type="textarea" class="mono"></q-input>
+              </div>
+              <div class="col-grow">
+                <prism-editor class="mono full-height" v-model="sql" :highlight="highlighter" line-numbers readonly></prism-editor>
+              </div>
+            </div>
+                <q-dialog v-model="about">
+            <q-card>
+              <q-card-section>
+                <div class="text-h6">About Mybatis Log Parser</div>
+              </q-card-section>
+              <q-card-section class="q-pt-none">
+                <q-list dense padding>
+                  <q-list-label>Code by: <a href="/">Composite</a></q-list-label>
+                  <q-separator spaced></q-separator>
+                  <q-item-label header>Libraries used</q-item-label>
+                  <q-item>
+                    <q-item-section avatar>
+                      <q-avatar size="sm" class="q-mr-md">
+                        <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg">
+                      </q-avatar>
+                    </q-item-section>
+                    <q-item-section><a href="https://quasar.dev/">Quasar</a></q-item-section>
+                    <q-item-section side>
+                      <q-item-label caption>(UMD)</q-item-label>
+                    </q-item-section>
+                  </q-item>
+                  <q-item to="">
+                    <q-item-section avatar>
+                      <q-avatar size="sm" class="q-mr-md">
+                        <img src="https://prismjs.com/assets/logo.svg">
+                      </q-avatar>
+                    </q-item-section>
+                    <q-item-section><a href="https://prismjs.com/">Prism.js</a></q-item-section>
+                  </q-item>
+                  <q-item>
+                    <q-item-section avatar>
+                      <q-avatar size="sm" class="q-mr-md">
+                        <img src="https://unpkg.com/simple-icons@v3/icons/github.svg">
+                      </q-avatar>
+                    </q-item-section>
+                    <q-item-section><a href="https://github.com/koca/vue-prism-editor">Vue Prism Component</a></q-item-section>
+                  </q-item>
+                  <q-item>
+                    <q-item-section avatar>
+                      <q-avatar size="sm" class="q-mr-md">
+                        <img src="https://unpkg.com/simple-icons@v3/icons/github.svg">
+                      </q-avatar>
+                    </q-item-section>
+                    <q-item-section><a href="https://github.com/zeroturnaround/sql-formatter">SQL Formatter</a></q-item-section>
+                  </q-item>
+                </q-list>
+              </q-card-section>
+              <q-card-actions align="right">
+                <q-btn flat label="Close" color="primary" v-close-popup />
+              </q-card-actions>
+            </q-card>
+          </q-dialog>
+          </q-page>
+        </q-page-container>
+      </q-layout>
+    </div>
+    <script>
+    window.quasarConfig = {
+      dark: true
+    }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/quasar@1.14.1/dist/quasar.ie.polyfills.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@^2.0.0/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@1.14.1/dist/quasar.umd.min.js"></script>
+    <script src="https://unpkg.com/vue-prism-editor"></script>
+    <script src="https://unpkg.com/prismjs/prism.js"></script>
+    <script src="https://unpkg.com/prismjs/components/prism-sql.js"></script>
+    <script src="https://unpkg.com/sql-formatter@latest/dist/sql-formatter.min.js"></script>
+    
+    <script>
+      var PRE = /==>\s*Preparing:\s/, PAM = /==>\s*Parameters:\s/, FORM = /^(.*)\((\w*)\)$/
+      new Vue({
+        el: '#app',
+        data: function () {
+          return {
+            log: '',
+            sql: '',
+            tabs: [
+              {label: '2 spaces', value: '  '},
+              {label: '4 spaces', value: '    '},
+              {label: '6 spaces', value: '      '},
+              {label: '8 spaces', value: '        '},
+              {value: '\t', label: 'tabs'},
+            ], tab: '  ',
+            about: false
+          }
+        },
+        methods: {
+          highlighter: function(code) {
+            return Prism.highlight(code, Prism.languages.sql, "sql");
+          },
+          parseLog: function() {
+            var that = this, log = this.log, pair = {a:'',b:''}, result = [], indent = this.tab.value
+            if(!log) return
+            log.split(/\n/).forEach(function(s){
+              if(!s) return
+              if(PRE.test(s)) {
+                if(!pair.b) {
+                  result.push(sqlFormatter.format(pair.a, {language: 'db2', indent: indent}) + ';')
+                }
+                pair.a = PRE.test(s) ? s.substring(s.search(PRE) + PRE.exec(s)[0].length) : ''
+                pair.b = ''
+              } else if(pair.a && PAM.test(s)) {
+                var params = pair.b = s.substring(s.search(PAM) + PAM.exec(s)[0].length), param = []
+                params.split(/,\s/).forEach(function(raw){
+                  if(!raw && raw.trim() === 'null') {
+                    param.push('null')
+                  } else {
+                    var mat = FORM.exec(raw)
+                    if(mat.length > 0) {
+                      param.push(mat[2].toLowerCase() === 'string' ? ("'" + mat[1] + "'") : mat[1])
+                    } else param.push('null')
+                  }
+                })
+                result.push(sqlFormatter.format(pair.a, {language: 'db2', indent: indent, params: param}) + ';')
+                pair.a = ''
+              }
+            });
+            this.sql = (result.shift(), result).join('\n')
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
