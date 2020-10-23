@@ -29,7 +29,7 @@
     <div id="app">
       <q-layout view="hHh lpR fFf">
         <q-header elevated class="bg-primary text-white">
-          <q-toolbar>
+          <q-toolbar class="bg-grey-8">
             <q-toolbar-title>
               <q-avatar class="about" @click="about = true">
                 <img src="/img/mybatis-icon.png">
@@ -57,8 +57,16 @@
                 <div class="text-h6">About Mybatis Log Parser</div>
               </q-card-section>
               <q-card-section>
-                <div>HOWTO: Collect your mybatis query log and put into text area. and click 'PARSE!'</div>
-                <div>PROTIP: <code>ctrl+enter</code> also will parse to query for you. (mac users? later.)</div>
+                <div>HOWTO: Collect your mybatis query log and put into top area, then click 'PARSE!'</div>
+                <div>PROTIP: <code>ctrl+enter</code> shortcut will also parse to query for you.(macos users? later.)</div>
+                <div>
+                  NOTE: log content MUST matches 2 lines with:<br>
+                  <code>
+                    (Any log header content)<strong class="text-black bg-grey-4"> ==> Preparing: </strong>(Query content)<br>
+                    (Any log header content)<strong class="text-black bg-grey-4"> ==> Parameters: </strong>(Parameters, etc.)
+                  </code>
+                  <br>Other logs are ignored.
+                </div>
               </q-card-section>
               <q-card-section class="q-pt-none">
                 <q-list dense padding>
