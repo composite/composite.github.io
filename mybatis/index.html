@@ -33,6 +33,7 @@
             <q-toolbar-title>
               <q-avatar class="about" @click="about = true">
                 <img src="/img/mybatis-icon.png">
+                <q-tooltip>About</q-tooltip>
               </q-avatar>
               Mybatis Log Parser
             </q-toolbar-title>
@@ -44,7 +45,7 @@
           <q-page>
             <div class="column full-height">
               <div class="col-4">
-                <q-input v-model="log" square outlined type="textarea" class="mono"></q-input>
+                <q-input v-model="log" square outlined type="textarea" class="mono" autofocus v-on:keyup.ctrl.enter="parseLog"></q-input>
               </div>
               <div class="col-grow">
                 <prism-editor class="mono full-height" v-model="sql" :highlight="highlighter" line-numbers readonly></prism-editor>
@@ -54,6 +55,10 @@
             <q-card>
               <q-card-section>
                 <div class="text-h6">About Mybatis Log Parser</div>
+              </q-card-section>
+              <q-card-section>
+                <div>HOWTO: Collect your mybatis query log and put into text area. and click 'PARSE!'</div>
+                <div>PROTIP: <code>ctrl+enter</code> also will parse to query for you. (mac users? later.)</div>
               </q-card-section>
               <q-card-section class="q-pt-none">
                 <q-list dense padding>
@@ -97,8 +102,10 @@
                   </q-item>
                 </q-list>
               </q-card-section>
-              <q-card-actions align="right">
-                <q-btn flat label="Close" color="primary" v-close-popup />
+              <q-card-actions>
+                <q-btn flat class="flex" label="Example" color="primary" v-close-popup @click="example"></q-btn>
+                <q-space></q-space>
+                <q-btn flat class="flex" label="Close" color="primary" v-close-popup />
               </q-card-actions>
             </q-card>
           </q-dialog>
@@ -170,6 +177,11 @@
               }
             });
             this.sql = (result.shift(), result).join('\n')
+          },
+          example: function() {
+            this.log = 'DEBUG: java.sql.Connection - ==>  Preparing: SELECT TEST1, TEST2 FROM DUAL WHERE COL1 = ? AND COL2 = ? AND NO = ?\n' +
+                       'DEBUG: java.sql.PreparedStatement - ==> Parameters: test1(String), test2(String), 13(Long)'
+            this.parseLog()
           }
         }
       })
