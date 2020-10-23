@@ -154,6 +154,7 @@
           return 'BTS'
         }
       })
+      var PROC_S = /^\{\s*call\s*/i, PROC_E = /\}$/
       new Vue({
         el: '#app',
         data: function () {
@@ -175,15 +176,19 @@
             return Prism.highlight(code, Prism.languages.sql, "sql");
           },
           parseLog: function() {
-            var that = this, log = this.log, pair = {a:'',b:''}, result = [], indent = this.tab.value
+            var that = this, log = this.log, pair = {a:'',b:'',c:'db2'}, result = [], indent = this.tab.value
             if(!log) return
             log.split(/\n/).forEach(function(s){
               if(!s) return
               if(PRE.test(s)) {
                 if(!pair.b) {
-                  result.push(sqlFormatter.format(pair.a, {language: 'db2', indent: indent}) + ';')
+                  result.push(sqlFormatter.format(pair.a, {language: pair.c || 'db2', indent: indent}) + ';')
                 }
                 pair.a = PRE.test(s) ? s.substring(s.search(PRE) + PRE.exec(s)[0].length) : ''
+                if(!pair.a.indexOf('{')) {
+                  pair.a = pair.a.replace(PROC_S, '').replace(PROC_E, '')
+                  pair.c = 'pl/sql'
+                } else pair.c = 'db2'
                 pair.b = ''
               } else if(pair.a && PAM.test(s)) {
                 var params = pair.b = s.substring(s.search(PAM) + PAM.exec(s)[0].length), param = []
@@ -197,7 +202,7 @@
                     } else param.push('null')
                   }
                 })
-                result.push(sqlFormatter.format(pair.a, {language: 'db2', indent: indent, params: param}) + ';')
+                result.push(sqlFormatter.format(pair.a, {language: pair.c || 'db2', indent: indent, params: param}) + ';')
                 pair.a = ''
               }
             });
