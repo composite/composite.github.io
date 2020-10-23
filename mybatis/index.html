@@ -18,6 +18,12 @@
     <link rel="stylesheet" href="https://unpkg.com/vue-prism-editor/dist/prismeditor.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/prismjs/themes/prism-tomorrow.css" />
     <style>
+      body{font-size: 16px;}
+      input[type="text"],
+      select:focus,
+      textarea {
+        font-size: inherit;
+      }
       a {color: white;}
       .about {cursor: help;}
       .mono {font-family: D2Coding, NanumGothicCoding, 'Courier New', Courier, monospace;}
@@ -45,7 +51,7 @@
           <q-page>
             <div class="column full-height">
               <div class="col-4">
-                <q-input v-model="log" square outlined type="textarea" class="mono" autofocus v-on:keyup.ctrl.enter="parseLog"></q-input>
+                <q-input v-model="log" square outlined type="textarea" class="mono" autofocus v-on:keyup.ctrl.enter="parseLog" v-on:keyup.meta.enter="parseLog"></q-input>
               </div>
               <div class="col-grow">
                 <prism-editor class="mono full-height" v-model="sql" :highlight="highlighter" line-numbers readonly></prism-editor>
@@ -58,7 +64,7 @@
               </q-card-section>
               <q-card-section>
                 <div>HOWTO: Collect your mybatis query log and put into top area, then click 'PARSE!'</div>
-                <div>PROTIP: <code>ctrl+enter</code> shortcut will also parse to query for you.(macos users? later.)</div>
+                <div>PROTIP: (ctrl/&#x2318;)+ENTER shortcut will also parse to query for you.</div>
                 <div>
                   NOTE: log content MUST matches 2 lines with:<br>
                   <code>
@@ -66,6 +72,7 @@
                     (Any log header content)<strong class="text-black bg-grey-4"> ==> Parameters: </strong>(Parameters, etc.)
                   </code>
                   <br>Other logs are ignored.
+                  <br>This app does not save any data.
                 </div>
               </q-card-section>
               <q-card-section class="q-pt-none">
@@ -139,7 +146,14 @@
     <script src="https://unpkg.com/sql-formatter@latest/dist/sql-formatter.min.js"></script>
     
     <script>
-      var PRE = /==>\s*Preparing:\s/, PAM = /==>\s*Parameters:\s/, FORM = /^(.*)\((\w*)\)$/
+      var PRE = /==>\s*Preparing:\s/, PAM = /==>\s*Parameters:\s/, FORM = /^(.*)\((\w*)\)$/, UNLOAD = false
+      window.addEventListener('beforeunload', function(e){
+        if(UNLOAD) {
+          e.preventDefault()
+          e.returnValue = 'BTS'
+          return 'BTS'
+        }
+      })
       new Vue({
         el: '#app',
         data: function () {
@@ -187,7 +201,8 @@
                 pair.a = ''
               }
             });
-            this.sql = (result.shift(), result).join('\n')
+            UNLOAD = result.length > 1
+            this.sql = (result.shift(), result).join('\n\n') + '\n'
           },
           example: function() {
             this.log = 'DEBUG: java.sql.Connection - ==>  Preparing: SELECT TEST1, TEST2 FROM DUAL WHERE COL1 = ? AND COL2 = ? AND NO = ?\n' +
