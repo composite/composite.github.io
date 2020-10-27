@@ -154,7 +154,7 @@
           return 'BTS'
         }
       })
-      var PROC_S = /^\{\s*call\s*/i, PROC_E = /\}$/
+      var PROC_S = /^\{\s*call\s*/i, PROC_E = /\}$/, ESCA = /'/g;
       new Vue({
         el: '#app',
         data: function () {
@@ -193,12 +193,12 @@
               } else if(pair.a && PAM.test(s)) {
                 var params = pair.b = s.substring(s.search(PAM) + PAM.exec(s)[0].length), param = []
                 params.split(/,\s/).forEach(function(raw){
-                  if(!raw && raw.trim() === 'null') {
+                  if(!raw || raw.trim() === 'null') {
                     param.push('null')
                   } else {
                     var mat = FORM.exec(raw)
                     if(mat.length > 0) {
-                      param.push(mat[2].toLowerCase() === 'string' ? ("'" + mat[1] + "'") : mat[1])
+                      param.push(mat[2].toLowerCase() === 'string' ? ("'" + mat[1].replace(ESCA, "''") + "'") : mat[1])
                     } else param.push('null')
                   }
                 })
