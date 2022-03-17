@@ -36,7 +36,17 @@
       linear-gradient(180deg, rgba(72, 72, 72, 1) 0%, rgba(72, 72, 72, 1) 10%, rgba(192, 192, 192, 1) 40%, rgba(72, 72, 72, 1) 70%, rgba(72, 72, 72, 1) 100%),
       linear-gradient(180deg, rgba(72, 72, 72, 1) 0%, rgba(72, 72, 72, 1) 10%, rgba(192, 192, 192, 1) 40%, rgba(72, 72, 72, 1) 90%, rgba(72, 72, 72, 1) 100%);
     background-size: 6% 80%, 6% 80%, 6% 80%;
-    background-position: 10% 50%, 18% 50%, 26% 50%;
+    background-position: -18% 50%, -18% 50%, -18% 50%;
     background-repeat: no-repeat,no-repeat,no-repeat;
+    animation: loading 4s steps(32, jump-start) 2s infinite;
+  }
+
+  @keyframes loading {
+    from {
+      background-position: -32% 50%, -24% 50%, -16% 50%;
+    }
+    to {
+      background-position: 160% 50%, 168% 50%, 175% 50%;
+    }
   }
 </style>
