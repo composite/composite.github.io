@@ -1,6 +1,9 @@
+import { mdsvex } from "mdsvex";
+import mdsvexConfig from "./mdsvex.config.js";
 import sveltePreprocess from "svelte-preprocess";
 
 export default {
+  extensions: [".svelte", ...mdsvexConfig.extensions],
   extensions: [".svelte"],
 
   // Consult https://github.com/sveltejs/svelte-preprocess
@@ -9,5 +12,6 @@ export default {
     sveltePreprocess({
       postcss: true,
     }),
+    mdsvex(mdsvexConfig),
   ],
 };
