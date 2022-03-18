@@ -4,7 +4,6 @@ import sveltePreprocess from "svelte-preprocess";
 
 export default {
   extensions: [".svelte", ...mdsvexConfig.extensions],
-  extensions: [".svelte"],
 
   // Consult https://github.com/sveltejs/svelte-preprocess
   // for more information about preprocessors

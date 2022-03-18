@@ -1,4 +1,5 @@
 <div class="logon">새로운 시작</div>
+<main class="prose lg:prose-xl"><slot></slot></main>
 <style>
   .logon {
     width: 100%;

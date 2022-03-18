@@ -9,6 +9,8 @@ const config = defineConfig({
 
   remarkPlugins: [],
   rehypePlugins: [],
+
+  layout: {"_": "./src/lib/Welcome.svelte"},
 });
 
 export default config;
