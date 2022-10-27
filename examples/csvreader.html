@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV 읽기 예제</title>
+</head>
+<body>
+    <h1>Stream API 를 이용한 CSV 읽기 예제</h1>
+    <fieldset>
+        <button type="button" id="read">읽어보기</button>
+        <button type="button" id="reset">초기화</button>
+        <ul>
+            <li>원문: <a href="https://velog.io/@composite/%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EB%8C%80%EC%9A%A9%EB%9F%89-%ED%8C%8C%EC%9D%BC-1-%ED%95%9C%EC%A4%84%EC%94%A9-%EC%9D%BD%EA%B8%B0">브라우저 대용량 파일 1 - 한줄씩 읽기</a></li>
+            <li>도움: <a href="https://streams.spec.whatwg.org/demos/">Streams Demos</a></li>
+        </ul>
+        소스보기는 알아서.
+    </fieldset>
+    <br>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+    </table>
+    <script type="text/javascript" src="js/stream.js" async></script>
+    <script type="text/javascript">
+        (() => {
+            const out = document.getElementById('rows')
+            const read = document.getElementById('read')
+            const reset = document.getElementById('reset')
+            read.addEventListener('click', () => {
+                read.disabled = reset.disabled = true
+                fetch('data/dummy_name_country_email.csv').then(response => {
+                    response.body
+                        .pipeThrough(new TextDecoderStream())
+                        .pipeThrough(splitStream('\n'))
+                        .pipeTo(new WritableStream({
+                            write (raw) {
+                                const row = raw.split(',')
+                                const tr = document.createElement('tr')
+                                raw.split(',').forEach(col => (tr.appendChild(document.createElement('td')).textContent = col))
+                                rows.appendChild(tr)
+                            },
+                            close() {
+                                read.disabled = reset.disabled = false
+                            }
+                        }))
+                })
+            })
+            reset.addEventListener('click', () => (out.innerHTML = ''))
+        })()
+    </script>
+</body>
+</html>
