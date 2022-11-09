@@ -1,0 +1,41 @@
+---
+import BackEndSkill from "./skills/BackEndSkill.astro";
+import FrontEndSkill from "./skills/FrontEndSkill.astro";
+import ArchitectSkill from "./skills/ArchitectSkill.astro";
+---
+<style>
+.skills-fg {
+  @apply px-20 flex justify-center items-center;
+}
+.skills-fg :global(article) {
+  @apply grow border-2 bg-white border-cyan-700 border-solid p-10 rounded-xl text-center w-1/3;
+  margin-top: -4rem;
+  margin-bottom: -4rem;
+  z-index: 1;
+  min-width: 10rem;
+}
+.skills-fg :global(article) :global(p) {
+  @apply text-sm break-keep;
+}
+.skills-fg :global(article) :global(dt) {
+  @apply text-lg text-cyan-900 my-2;
+}
+.skills-fg :global(article) :global(dd) {
+  @apply text-base;
+}
+.skills-fg :global(.primary-skill) {
+  transform: scale(1.1);
+  z-index: 2;
+}
+</style>
+
+<div class="skills-root">
+  <div class="skills-bg">
+    <!-- TODO -->
+  </div>
+  <section class="skills-fg">
+    <BackEndSkill />
+    <FrontEndSkill />
+    <ArchitectSkill />
+  </section>
+</div>

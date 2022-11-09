@@ -1,0 +1,39 @@
+{
+  "name": "@composite/comnekr-man",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/partytown": "^1.0.1",
+    "@astrojs/react": "^1.2.2",
+    "@astrojs/svelte": "^1.0.2",
+    "@astrojs/tailwind": "^2.1.1",
+    "@astrojs/vue": "^1.2.1",
+    "@heroicons/react": "^2.0.12",
+    "@heroicons/vue": "^2.0.12",
+    "@nanostores/react": "^0.4.0",
+    "@nanostores/vue": "^0.6.1",
+    "@tanstack/vue-table": "^8.5.22",
+    "@types/plotly.js": "^2.12.8",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "@types/react-plotly.js": "^2.5.2",
+    "astro": "^1.6.0",
+    "dayjs": "^1.11.6",
+    "nanostores": "^0.7.0",
+    "plotly.js": "^2.16.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-plotly.js": "^2.6.0",
+    "svelte": "^3.46.4",
+    "tailwindcss": "^3.0.24",
+    "vue": "^3.2.30"
+  }
+}

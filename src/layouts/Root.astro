@@ -1,0 +1,28 @@
+---
+import '~/style/main.css'
+import { titleState } from '../store/ui';
+const title = titleState.get() ?? ''
+
+---
+
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} - comne.kr</title>
+    <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/font-kopub@1.0/kopubdotum.min.css'>
+    <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/@fontsource/nunito@4.5.11/index.css'>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+<style>
+  html,body {
+    min-width: 100vw;
+    min-height: 100vh;
+  }
+</style>

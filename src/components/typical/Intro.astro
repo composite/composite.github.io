@@ -1,0 +1,30 @@
+<style>
+  .intro {
+    @apply absolute left-0 right-0 top-0 bottom-0 shadow-2xl shadow-gray-900 flex flex-col justify-center items-center text-4xl text-white;
+    z-index: 1;
+    background-image: url('/intro.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  .intro::before {
+    @apply absolute;
+    content: "";
+    top: calc(50% - 10rem);
+    left: calc(50% - 10rem);
+    width: 20rem;
+    height: 20rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 9999px;
+    z-index: -1;
+  }
+  .intro p {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+</style>
+<div class="intro">
+  <h1 class="font-bold">환영합니다</h1>
+  <h2>comne.kr</h2>
+  <p class="absolute bottom-0 left-0 right-0 text-center text-sm">
+    아래로 스크롤하십시오.
+  </p>
+</div>

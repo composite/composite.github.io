@@ -1,0 +1,24 @@
+---
+import MySelf from '~/components/profile/MySelf.astro';
+import MySkills from '~/components/profile/MySkills.astro';
+import ExpTimeline from '~/components/table/ExpTimeline.vue';
+import Intro from '~/components/typical/Intro.astro';
+import StickyStart from '~/components/typical/StickyStart.svelte';
+import Root from '~/layouts/Root.astro';
+import { titleState } from '~/store/ui';
+
+// TODO Visual https://coderstats.net/github/#composite
+// TODO https://api.github.com/users/composite/events/public
+
+titleState.set('컴내꺼')
+---
+<Root>
+  <Intro />
+  <StickyStart client:only="svelte">
+    <MySelf />
+    <MySkills />
+  </StickyStart>
+  <ExpTimeline />
+</Root>
+<style>
+</style>
