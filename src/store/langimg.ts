@@ -1,4 +1,4 @@
-export const experienceImages = {
+export const experienceImages: Record<string, string> = {
   aws: '//cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg',
   apache: '//cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original-wordmark.svg',
   babel: '//cdn.jsdelivr.net/gh/devicons/devicon/icons/babel/babel-plain.svg',

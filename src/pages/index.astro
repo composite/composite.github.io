@@ -1,4 +1,6 @@
 ---
+import TopPrepare from '~/components/contact/TopPrepare';
+import LangBadges from '~/components/contact/LangBadges.svelte';
 import MySelf from '~/components/profile/MySelf.astro';
 import MySkills from '~/components/profile/MySkills.astro';
 import ExpTimeline from '~/components/table/ExpTimeline.vue';
@@ -6,9 +8,7 @@ import Intro from '~/components/typical/Intro.astro';
 import StickyStart from '~/components/typical/StickyStart.svelte';
 import Root from '~/layouts/Root.astro';
 import { titleState } from '~/store/ui';
-
-// TODO Visual https://coderstats.net/github/#composite
-// TODO https://api.github.com/users/composite/events/public
+import BusinessCard from '~/components/contact/BusinessCard';
 
 titleState.set('컴내꺼')
 ---
@@ -17,8 +17,16 @@ titleState.set('컴내꺼')
   <StickyStart client:only="svelte">
     <MySelf />
     <MySkills />
+    <ExpTimeline />
   </StickyStart>
-  <ExpTimeline />
+  <TopPrepare>
+    <div class="overflow-hidden absolute top-0 left-0 right-0 opacity-30 grid grid-flow-row gap-4">
+      <LangBadges />
+      <LangBadges reverse />
+      <LangBadges inverse />
+    </div>
+  </TopPrepare>
+  <BusinessCard />
 </Root>
 <style>
 </style>

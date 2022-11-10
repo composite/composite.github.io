@@ -9,10 +9,10 @@
   .intro::before {
     @apply absolute;
     content: "";
-    top: calc(50% - 10rem);
-    left: calc(50% - 10rem);
-    width: 20rem;
-    height: 20rem;
+    top: calc(50% - 16vw);
+    left: calc(50% - 16vw);
+    width: 32vw;
+    height: 32vw;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 9999px;
     z-index: -1;
@@ -20,11 +20,18 @@
   .intro p {
     background-color: rgba(0, 0, 0, 0.5);
   }
+  .intro h1 {
+    font-size: max(6vw, 2rem);
+    margin-bottom: clamp(1rem, 3vw, 3rem);
+  }
+  .intro h2 {
+    font-size: max(3vw, 1.2rem);
+  }
 </style>
 <div class="intro">
-  <h1 class="font-bold">환영합니다</h1>
-  <h2>comne.kr</h2>
-  <p class="absolute bottom-0 left-0 right-0 text-center text-sm">
+  <h1 class="font-bold">Fullstack</h1>
+  <h2>business developer</h2>
+  <p class="absolute bottom-0 left-0 right-0 text-center text-base">
     아래로 스크롤하십시오.
   </p>
 </div>
