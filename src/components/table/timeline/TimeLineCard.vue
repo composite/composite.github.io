@@ -1,6 +1,6 @@
 <style scoped>
 .timeline-card {
-  @apply relative mx-4 rounded-sm border-l-4 border-solid border-l-blue-500 shadow-md shadow-gray-400 bg-gray-100 pt-6 pb-5 pl-6;
+  @apply relative mx-4 rounded-sm border-l-4 border-solid border-l-blue-500 shadow-md shadow-gray-400 bg-gray-100 pt-6 pb-5 px-6;
   z-index: 1;
 }
 .timeline-card::before {

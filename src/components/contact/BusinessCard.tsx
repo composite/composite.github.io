@@ -29,7 +29,9 @@ export default function BusinessCard() {
             <a target="_blank" href="https://svelte.dev/"><img src="//cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg" alt="svelte" /></a>
             <a target="_blank" href="https://tailwindcss.com/"><img src="//cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" alt="tailwind" /></a>
         </div>
-        <div className="sticky bottom-0 w-full h-8 bg-gray-700"></div>
+        <div className="sticky bottom-0 w-full bg-gray-700 text-gray-300 text-center py-4">
+          <a className="" href="https://github.com/composite/composite.github.io">View source on Github</a>
+        </div>
       </div>
     </div>;
 }
