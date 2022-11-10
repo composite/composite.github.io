@@ -37,3 +37,4 @@ com_crashlytics_export_strings.xml
 
 *.sublime-project
 *.sublime-workspace
+node_modules
