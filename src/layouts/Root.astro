@@ -13,6 +13,14 @@ const title = titleState.get() ?? ''
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title} - comne.kr</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E7NSC79MPQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-E7NSC79MPQ');
+    </script>
     <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/font-kopub@1.0/kopubdotum.min.css'>
     <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/@fontsource/nunito@4.5.11/index.css'>
 	</head>
